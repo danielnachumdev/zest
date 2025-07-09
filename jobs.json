@@ -1,0 +1,42 @@
+{
+  "tasks": [
+    {
+      "job_name": "Prowler",
+      "payload": {
+        "region": "us-east-1",
+        "account_id": "123456789012"
+      }
+    },
+    {
+      "job_name": "LongRunningJob",
+      "payload": {
+        "seconds": 10
+      }
+    },
+    {
+      "job_name": "Shooker",
+      "payload": {
+        "numbers": [1, 2, 3, 4, 5]
+      }
+    },
+    {
+      "job_name": "Prowler",
+      "payload": {
+        "region": "us-west-1",
+        "account_id": "12009012"
+      }
+    },
+    {
+      "job_name": "NotARealJob",
+      "payload": {
+        "value": 7
+      }
+    },
+    {
+      "job_name": "LongRunningJob",
+      "payload": {
+        "seconds": 5
+      }
+    }
+  ]
+}
