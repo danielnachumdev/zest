@@ -1,16 +1,17 @@
+import asyncio
 import random
 import time
 
 class BaseJob:
     """Abstract base class for all jobs."""
     name = "BaseJob"
-    def execute(self, payload: dict):
+    async def execute(self, payload: dict):
         raise NotImplementedError("Subclasses must implement execute()")
 
 class Prowler(BaseJob):
     """AWS security assessment job using Prowler."""
     name = "Prowler"
-    def execute(self, payload):
+    async def execute(self, payload):
         time.sleep(random.uniform(0.1, 0.5))  # simulate work
         region = payload.get("region")
         account_id = payload.get("account_id")
@@ -36,17 +37,17 @@ class Prowler(BaseJob):
 class LongRunningJob(BaseJob):
     """A job that simulates a long-running task."""
     name = "LongRunningJob"
-    def execute(self, payload):
+    async def execute(self, payload):
         seconds = payload.get("seconds", 0)
         if not isinstance(seconds, (int, float)) or seconds <= 0:
             raise ValueError("LongRunningJob requires positive 'seconds' in payload")
-        time.sleep(seconds)  # actually sleep for the specified duration
+        await asyncio.sleep(seconds)  # actually sleep for the specified duration
         return {"status": "success", "result": f"Completed long running task after {seconds} seconds"}
 
 class Shooker(BaseJob):
     """A job that shakes up a list of numbers."""
     name = "Shooker"
-    def execute(self, payload):
+    async def execute(self, payload):
         time.sleep(random.uniform(0.1, 0.5))
         numbers = payload.get("numbers", [])
         if not isinstance(numbers, list):
